@@ -1,0 +1,6 @@
+@DinamikFırınSitesi_HostAddress = http://localhost:5226
+
+GET {{DinamikFırınSitesi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

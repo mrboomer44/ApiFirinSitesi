@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DinamikFırınSitesi/DinamikFırınSitesiAPI.csproj" />
+  <Project Path="DinamikFırınSitesiUı/DinamikFırınSitesiUı.csproj" Id="6c1a4ad9-1bae-4902-99c0-8ac2ddbde75f" />
+</Solution>

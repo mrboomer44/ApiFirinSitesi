@@ -1,0 +1,13 @@
+@model List<DinamikFırınSitesiUı.Dtos.AboutList.ResultAboutListDto>
+
+<div class="row g-2 mb-4">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-sm-6">
+                <i class="fa fa-check text-primary me-2"></i>@item.Articles
+            </div>
+        }
+    }
+</div>

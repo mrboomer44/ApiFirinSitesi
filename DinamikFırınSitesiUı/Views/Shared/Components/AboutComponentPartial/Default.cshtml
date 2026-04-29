@@ -1,0 +1,32 @@
+@model List<DinamikFırınSitesiUı.Dtos.Adouts.ResultAboutDto>
+
+<div class="container-xxl py-6" id="about">
+    <div class="container">
+        <div class="row g-5">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="row img-twice position-relative h-100">
+                            <div class="col-6">
+                                <img class="img-fluid rounded" src="@item.İmageUrl1" alt="">
+                            </div>
+                            <div class="col-6 align-self-end">
+                                <img class="img-fluid rounded" src="@item.İmageUrl2" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="h-100">
+                            <p class="text-primary text-uppercase mb-2">// About Us</p>
+                            <h1 class="display-6 mb-4">@item.Title</h1>
+                            <p>@item.Description</p>
+                            @await Component.InvokeAsync("AboutListComponentPartial")
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

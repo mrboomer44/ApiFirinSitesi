@@ -1,0 +1,54 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("HeadComponentPartial")
+
+<body>
+    <!-- Spinner Start -->
+    @await Component.InvokeAsync("SpinnerComponentPartial")
+    <!-- Spinner End -->
+    <!-- Topbar Start -->
+    @await Component.InvokeAsync("TopbarComponentPartial")
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    @await Component.InvokeAsync("NavbarComponentPartial")
+    <!-- Navbar End -->
+    <!-- Banner Start -->
+    @await Component.InvokeAsync("BannerComponentPartial") 
+    <!-- Banner End -->
+    <!-- Facts Start -->
+    @await Component.InvokeAsync("FactsComponentPartial") 
+    <!-- Facts End -->
+    <!-- About Start -->
+    @await Component.InvokeAsync("AboutComponentPartial") 
+    <!-- About End -->
+    <!-- Product Start -->
+    @await Component.InvokeAsync("ProductComponentPartial") 
+    <!-- Product End -->
+    <!-- Service Start -->
+    @await Component.InvokeAsync("ServiceComponentPartial") 
+    <!-- Service End -->
+    <!-- Team Start -->
+    @await Component.InvokeAsync("TeamComponentPartial")
+    <!-- Team End -->
+    <!-- Testimonial Start -->
+    @await Component.InvokeAsync("TestimonialComponentPartial") 
+    <!-- Testimonial End -->
+    <!-- Footer Start -->
+    @await Component.InvokeAsync("FooterComponentPartial") 
+    <!-- Footer End -->
+    <!-- Copyright Start -->
+    @await Component.InvokeAsync("CopyrightComponentPartial")
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    @await Component.InvokeAsync("JavaScriptComponentPartial")
+</body>
+
+</html>

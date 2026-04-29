@@ -1,0 +1,29 @@
+﻿using DinamikFırınSitesiUı.Dtos.AboutList;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
+namespace DinamikFırınSitesiUı.ViewComponent
+{
+    public class AboutListComponentPartial : Microsoft.AspNetCore.Mvc.ViewComponent
+    {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public AboutListComponentPartial(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7061/api/AboutList");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultAboutListDto>>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+    }
+}
