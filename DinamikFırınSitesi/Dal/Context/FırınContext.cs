@@ -26,5 +26,6 @@ namespace DinamikFırınSitesi.Dal.Context
         public DbSet <Banner> Banners { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<NewsletterEmail> NewsletterEmails { get; set; }
+        public DbSet<login> logins { get; set; }
     }
 }

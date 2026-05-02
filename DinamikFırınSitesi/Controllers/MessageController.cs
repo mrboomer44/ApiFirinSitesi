@@ -1,4 +1,4 @@
-﻿using AkademiqDinamikFırınSitesiApi.Dal.Entitys;
+using AkademiqDinamikFırınSitesiApi.Dal.Entitys;
 using DinamikFırınSitesi.Dal.Context;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +30,7 @@ namespace DinamikFırınSitesiAPI.Controllers
         [HttpPost]
         public IActionResult CreateMessage(Message message)
         {
+            message.Read = false;  // Yeni mesaj her zaman okunmamış başlar
             _context.Messages.Add(message);
             _context.SaveChanges();
             return Ok("Ekleme işlemi tamamlandı");

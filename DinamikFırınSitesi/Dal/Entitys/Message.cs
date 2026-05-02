@@ -1,4 +1,4 @@
-﻿namespace AkademiqDinamikFırınSitesiApi.Dal.Entitys
+namespace AkademiqDinamikFırınSitesiApi.Dal.Entitys
 {
     public class Message
     {
@@ -7,5 +7,6 @@
         public string Mail { get; set; }
         public string Subject { get; set; }
         public string MessageContent { get; set; }
+        public bool Read { get; set; } = false;
     }
 }

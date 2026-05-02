@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Fırın Admin Paneli</title>
+    
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f3f4f6;
+                overflow-x: hidden;
+            }
+
+            .wrapper {
+                display: flex;
+                width: 100%;
+            }
+            /* Sidebar Ayarları */
+            #sidebar {
+                min-width: 260px;
+                max-width: 260px;
+                min-height: 100vh;
+                background-color: #1f2937; /* Koyu gri/lacivert */
+                color: #fff;
+                transition: all 0.3s;
+            }
+
+                #sidebar .sidebar-header {
+                    padding: 24px 20px;
+                    background: #111827;
+                }
+
+                #sidebar ul.components {
+                    padding: 15px 0;
+                }
+
+                #sidebar ul li a {
+                    padding: 12px 24px;
+                    font-size: 1.05em;
+                    display: block;
+                    color: #9ca3af;
+                    text-decoration: none;
+                    transition: 0.2s;
+                }
+
+                    #sidebar ul li a:hover, #sidebar ul li.active > a {
+                        color: #fff;
+                        background: #374151;
+                        border-left: 4px solid #d97706;
+                    }
+            /* İçerik Ayarları */
+            #content {
+                width: 100%;
+                padding: 20px;
+                min-height: 100vh;
+                transition: all 0.3s;
+            }
+
+            .navbar-custom {
+                background-color: #fff;
+                border-radius: 10px;
+                padding: 15px 24px;
+                margin-bottom: 24px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h5 class="mb-0 fw-bold"><i class="fa-solid fa-wheat-awn me-2 text-warning"></i> Fırın Yönetim</h5>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="/Admin/Index"><i class="fa-solid fa-chart-pie me-2 w-20px"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="/Admin/Product/Index"><i class="fa-solid fa-bread-slice me-2"></i> Ürünler</a>
+                </li>
+                <li>
+                    <a href="/Admin/Category/Index"><i class="fa-solid fa-layer-group me-2"></i> Kategoriler</a>
+                </li>
+                <li>
+                    <a href="/Admin/Order/Index"><i class="fa-solid fa-cart-shopping me-2"></i> Siparişler</a>
+                </li>
+                <li class="mt-4 border-top border-secondary pt-3">
+                    <a href="/Login/Logout" class="text-danger"><i class="fa-solid fa-right-from-bracket me-2"></i> Çıkış Yap</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Üst Navigasyon -->
+            <nav class="navbar navbar-expand-lg navbar-light navbar-custom d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 text-dark fw-bold">@ViewData["Title"]</h5>
+                <div class="d-flex align-items-center">
+                    <span class="text-muted fw-medium me-3">Hoş geldin, Yönetici</span>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=d97706&color=fff" class="rounded-circle" width="35" height="35" alt="Admin">
+                </div>
+            </nav>
+
+            <!-- Render Body -->
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- Script Yüklemeleri -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
