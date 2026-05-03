@@ -1,5 +1,201 @@
+@model DinamikFırınSitesiUı.Models.DashboardMessageViewModel
+
 @{
+    ViewData["Title"] = "Gelen Mesajlar";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Admin Panel";
 }
 
+<!-- Üst Orta Mesaj Filtre Butonları -->
+<ul class="nav nav-pills justify-content-center mb-4 border-0" id="messageTabs" role="tablist">
+    <li class="nav-item shadow-sm bg-white rounded-pill me-3" role="presentation">
+        <button class="nav-link active rounded-pill fw-medium px-4 py-2 d-flex align-items-center" id="unread-tab" data-bs-toggle="tab" data-bs-target="#unread" type="button" role="tab" aria-controls="unread" aria-selected="true">
+            <i class="fa-solid fa-envelope text-warning me-2"></i> Okunmamış Mesajlar
+            <span class="badge bg-danger ms-2 rounded-pill">@Model.UnreadMessages.Count</span>
+        </button>
+    </li>
+    <li class="nav-item shadow-sm bg-white rounded-pill" role="presentation">
+        <button class="nav-link rounded-pill fw-medium px-4 py-2 text-secondary d-flex align-items-center" id="read-tab" data-bs-toggle="tab" data-bs-target="#read" type="button" role="tab" aria-controls="read" aria-selected="false">
+            <i class="fa-solid fa-envelope-open me-2"></i> Okunmuş Mesajlar
+        </button>
+    </li>
+</ul>
+
+<!-- Sekme İçerikleri -->
+<div class="tab-content" id="messageTabsContent">
+    
+    <!-- OKUNMAMIŞ MESAJLAR TABLOSU -->
+    <div class="tab-pane fade show active" id="unread" role="tabpanel" aria-labelledby="unread-tab">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light text-secondary">
+                            <tr>
+                                <th class="border-0 px-4 py-3">Gönderen Bilgileri</th>
+                                <th class="border-0 py-3">Konu & Özet</th>
+                                <th class="border-0 text-end px-4 py-3">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody class="border-top-0">
+                            @if (!Model.UnreadMessages.Any())
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-center py-5 text-muted">Harika! Okunmamış yeni mesajınız bulunmuyor.</td>
+                                </tr>
+                            }
+                            @foreach (var msg in Model.UnreadMessages)
+                            {
+                                <tr class="bg-warning bg-opacity-10">
+                                    <td class="px-4 py-3">
+                                        <div class="d-flex flex-column">
+                                            <span class="fw-bold text-dark">@msg.Name</span>
+                                            <small class="text-muted"><i class="fa-regular fa-envelope me-1"></i>@msg.Mail</small>
+                                        </div>
+                                    </td>
+                                    <td class="py-3">
+                                        <div class="fw-bold text-dark mb-1">@msg.Subject</div>
+                                        <div class="text-secondary small text-truncate" style="max-width: 300px;">
+                                            @msg.MessageContent
+                                        </div>
+                                    </td>
+                                    <td class="text-end px-4 py-3">
+                                        <button type="button" class="btn btn-sm btn-light border text-primary me-2 fw-medium" data-bs-toggle="modal" data-bs-target="#messageModal-@msg.MessageId">
+                                            <i class="fa-solid fa-eye me-1"></i> Detaylı Oku
+                                        </button>
+                                        <a href="/Admin/MarkAsRead/@msg.MessageId" class="btn btn-sm btn-light border text-success me-2" title="Okundu İşaretle">
+                                            <i class="fa-solid fa-check"></i>
+                                        </a>
+                                        <a href="/Admin/DeleteMessage/@msg.MessageId" class="btn btn-sm btn-light border text-danger" title="Sil">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!-- Mesaj Detay Modalı -->
+                                <div class="modal fade" id="messageModal-@msg.MessageId" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content border-0 rounded-4 shadow">
+                                            <div class="modal-header border-bottom-0 pb-0">
+                                                <h5 class="modal-title fw-bold">Mesaj Detayı</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body pt-3">
+                                                <div class="mb-3 p-3 bg-light rounded-3">
+                                                    <div class="row mb-2">
+                                                        <div class="col-4 text-muted small">Gönderen:</div>
+                                                        <div class="col-8 fw-medium">@msg.Name</div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-4 text-muted small">E-Posta:</div>
+                                                        <div class="col-8 fw-medium">@msg.Mail</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4 text-muted small">Konu:</div>
+                                                        <div class="col-8 fw-bold text-dark">@msg.Subject</div>
+                                                    </div>
+                                                </div>
+                                                <div class="p-1">
+                                                    <p class="text-dark mb-0" style="white-space: pre-wrap;">@msg.MessageContent</p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer border-top-0 pt-0">
+                                                <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Kapat</button>
+                                                <a href="/Admin/MarkAsRead/@msg.MessageId" class="btn btn-primary rounded-pill px-4" style="background-color: #d97706; border: none;">Okundu İşaretle</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OKUNMUŞ MESAJLAR TABLOSU -->
+    <div class="tab-pane fade" id="read" role="tabpanel" aria-labelledby="read-tab">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light text-secondary">
+                            <tr>
+                                <th class="border-0 px-4 py-3">Gönderen Bilgileri</th>
+                                <th class="border-0 py-3">Konu & Özet</th>
+                                <th class="border-0 text-end px-4 py-3">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody class="border-top-0">
+                            @if (!Model.ReadMessages.Any())
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-center py-5 text-muted">Geçmişe dönük okunmuş mesaj bulunmuyor.</td>
+                                </tr>
+                            }
+                            @foreach (var msg in Model.ReadMessages)
+                            {
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-dark">@msg.Name</span>
+                                            <small class="text-muted">@msg.Mail</small>
+                                        </div>
+                                    </td>
+                                    <td class="py-3">
+                                        <div class="text-dark mb-1">@msg.Subject</div>
+                                        <div class="text-secondary small text-truncate" style="max-width: 300px;">
+                                            @msg.MessageContent
+                                        </div>
+                                    </td>
+                                    <td class="text-end px-4 py-3">
+                                        <button type="button" class="btn btn-sm btn-light border text-secondary me-2" data-bs-toggle="modal" data-bs-target="#messageModal-@msg.MessageId">
+                                            <i class="fa-solid fa-eye"></i> İncele
+                                        </button>
+                                        <a href="/Admin/DeleteMessage/@msg.MessageId" class="btn btn-sm btn-light border text-danger" title="Sil">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!-- Okunmuş Mesaj Detay Modalı -->
+                                <div class="modal fade" id="messageModal-@msg.MessageId" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content border-0 rounded-4 shadow">
+                                            <div class="modal-header border-bottom-0 pb-0">
+                                                <h5 class="modal-title fw-bold">Mesaj Detayı</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body pt-3">
+                                                <div class="mb-3 p-3 bg-light rounded-3">
+                                                    <div class="row mb-2">
+                                                        <div class="col-4 text-muted small">Gönderen:</div>
+                                                        <div class="col-8 fw-medium">@msg.Name</div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-4 text-muted small">E-Posta:</div>
+                                                        <div class="col-8 fw-medium">@msg.Mail</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4 text-muted small">Konu:</div>
+                                                        <div class="col-8 fw-bold text-dark">@msg.Subject</div>
+                                                    </div>
+                                                </div>
+                                                <div class="p-1">
+                                                    <p class="text-dark mb-0" style="white-space: pre-wrap;">@msg.MessageContent</p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer border-top-0 pt-0">
+                                                <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Kapat</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

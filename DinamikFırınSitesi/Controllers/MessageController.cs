@@ -30,7 +30,7 @@ namespace DinamikFırınSitesiAPI.Controllers
         [HttpPost]
         public IActionResult CreateMessage(Message message)
         {
-            message.Read = false;  // Yeni mesaj her zaman okunmamış başlar
+            message.Read = false;
             _context.Messages.Add(message);
             _context.SaveChanges();
             return Ok("Ekleme işlemi tamamlandı");
@@ -42,6 +42,19 @@ namespace DinamikFırınSitesiAPI.Controllers
             _context.Messages.Update(message);
             _context.SaveChanges();
             return Ok("Güncelleme işlemi tamamlandı");
+        }
+
+        // Mesajı okundu olarak işaretle
+        [HttpPut("MarkAsRead/{id}")]
+        public IActionResult MarkAsRead(int id)
+        {
+            var message = _context.Messages.Find(id);
+            if (message == null)
+                return NotFound("Mesaj bulunamadı");
+
+            message.Read = true;
+            _context.SaveChanges();
+            return Ok("Mesaj okundu olarak işaretlendi");
         }
 
         [HttpDelete]
