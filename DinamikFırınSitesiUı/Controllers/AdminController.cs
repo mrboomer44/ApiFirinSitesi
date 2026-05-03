@@ -52,7 +52,7 @@ namespace DinamikFırınSitesiUı.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> DeleteMessage(int id) 
+        public async Task<IActionResult> DeleteMessage(int id)
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.DeleteAsync($"https://localhost:7061/api/Message?MessageId={id}");
