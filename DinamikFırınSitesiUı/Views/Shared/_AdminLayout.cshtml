@@ -76,37 +76,37 @@
                 <h5 class="mb-0 fw-bold"><i class="fa-solid fa-wheat-awn me-2 text-warning"></i> Fırın Admin</h5>
             </div>
             <ul class="list-unstyled components">
-                <li class="active">
+                <li class="@(Context.Request.Path.StartsWithSegments("/Admin") && !Context.Request.Path.StartsWithSegments("/AdminBanner") && !Context.Request.Path.StartsWithSegments("/AdminCounter") && !Context.Request.Path.StartsWithSegments("/AdminAbout") && !Context.Request.Path.StartsWithSegments("/AdminProduct") && !Context.Request.Path.StartsWithSegments("/AdminServices") && !Context.Request.Path.StartsWithSegments("/AdminTeam") && !Context.Request.Path.StartsWithSegments("/AdminClient") && !Context.Request.Path.StartsWithSegments("/AdminNewsletter") && !Context.Request.Path.StartsWithSegments("/AdminGalery") && !Context.Request.Path.StartsWithSegments("/AdminContactSettings") ? "active" : "")">
                     <a href="/Admin/Index"><i class="fa-solid fa-envelope me-2 w-20px"></i> Mesajlar</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminBanner") ? "active" : "")">
                     <a href="/AdminBanner/Index"><i class="fa-solid fa-image me-2 w-20px"></i> Banner (Afiş) Yönetimi</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminCounter") ? "active" : "")">
                     <a href="/AdminCounter/Index"><i class="fa-solid fa-chart-line me-2 w-20px"></i> İstatistikler (Sayaçlar)</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminAbout") ? "active" : "")">
                     <a href="/AdminAbout/Index"><i class="fa-solid fa-address-card me-2 w-20px"></i> Hakkımızda Yönetimi</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminProduct") ? "active" : "")">
                     <a href="/AdminProduct/Index"><i class="fa-solid fa-bread-slice me-2 w-20px"></i> Ürün Yönetimi</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminServices") ? "active" : "")">
                     <a href="/AdminServices/Index"><i class="fa-solid fa-bell-concierge me-2 w-20px"></i> Hizmetler Yönetimi</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminTeam") ? "active" : "")">
                     <a href="/AdminTeam/Index"><i class="fa-solid fa-users-gear me-2 w-20px"></i> Ekip Yönetimi</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminClient") ? "active" : "")">
                     <a href="/AdminClient/Index"><i class="fa-solid fa-comments me-2 w-20px"></i> Müşteri Yorumları</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminNewsletter") ? "active" : "")">
                     <a href="/AdminNewsletter/Index"><i class="fa-solid fa-paper-plane me-2 w-20px"></i> Bülten Aboneleri</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminGalery") ? "active" : "")">
                     <a href="/AdminGalery/Index"><i class="fa-solid fa-images me-2 w-20px"></i> Foto Galeri</a>
                 </li>
-                <li>
+                <li class="@(Context.Request.Path.StartsWithSegments("/AdminContactSettings") ? "active" : "")">
                     <a href="/AdminContactSettings/Index"><i class="fa-solid fa-gear me-2 w-20px"></i> İletişim ve Sosyal Medya</a>
                 </li>
                 <li class="mt-4 border-top border-secondary pt-3">
