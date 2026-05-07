@@ -1,4 +1,4 @@
-﻿using AkademiqDinamikFırınSitesiApi.Dal.Entitys;
+using AkademiqDinamikFırınSitesiApi.Dal.Entitys;
 using DinamikFırınSitesiAPI.Dal.Entitys;
 using Microsoft.EntityFrameworkCore;
 

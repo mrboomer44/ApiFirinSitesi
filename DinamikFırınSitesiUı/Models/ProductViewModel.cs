@@ -1,4 +1,4 @@
-﻿using DinamikFırınSitesiUı.Dtos.Products;
+using DinamikFırınSitesiUı.Dtos.Products;
 
 namespace DinamikFırınSitesiUı.Models
 {

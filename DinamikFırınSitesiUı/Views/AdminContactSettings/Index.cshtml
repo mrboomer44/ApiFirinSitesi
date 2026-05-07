@@ -1,0 +1,143 @@
+﻿@model DinamikFırınSitesiUı.Models.ContactSettingsViewModel
+
+@{
+    ViewData["Title"] = "İletişim ve Sosyal Medya";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    bool hasCommunication = Model.Communications != null && Model.Communications.Any();
+    bool hasSocialMedia = Model.SocialMedias != null && Model.SocialMedias.Any();
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">İletişim Bilgileri (Adres & İletişim)</h5>
+        <small class="text-muted">Sitenin footer ve iletişim kısımlarında görünen temel iletişim bilgileri.</small>
+    </div>
+    @if (!hasCommunication)
+    {
+        <a href="/AdminContactSettings/AddCommunication" class="btn btn-primary rounded-pill px-4 fw-medium" style="background-color: #d97706; border: none;">
+            <i class="fa-solid fa-plus me-2"></i> Bilgileri Ekle
+        </a>
+    }
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 mb-5">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-secondary">
+                    <tr>
+                        <th class="border-0 px-4 py-3">Adres</th>
+                        <th class="border-0 py-3">Telefon</th>
+                        <th class="border-0 py-3">E-Posta</th>
+                        <th class="border-0 text-end px-4 py-3" style="width: 150px;">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!hasCommunication)
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center py-4 text-muted">İletişim bilgisi bulunamadı.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.Communications)
+                        {
+                            <tr>
+                                <td class="px-4 py-3 fw-medium">
+                                    <i class="fa-solid fa-location-dot text-danger me-2"></i>@item.Adress
+                                </td>
+                                <td class="py-3">
+                                    <i class="fa-solid fa-phone text-success me-2"></i>@item.Phone
+                                </td>
+                                <td class="py-3">
+                                    <i class="fa-solid fa-envelope text-primary me-2"></i>@item.Mail
+                                </td>
+                                <td class="text-end px-4 py-3">
+                                    <a href="/AdminContactSettings/UpdateCommunication/@item.CommunicationId" class="btn btn-sm btn-primary px-3 py-2 rounded-3 border-0" style="background-color: #d97706;">
+                                        Güncelle
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-4 border-top pt-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Sosyal Medya Hesapları</h5>
+    </div>
+    @if (!hasSocialMedia)
+    {
+        <a href="/AdminContactSettings/AddSocialMedia" class="btn btn-primary rounded-pill px-4 fw-medium" style="background-color: #d97706; border: none;">
+            <i class="fa-solid fa-plus me-2"></i> Hesapları Ekle
+        </a>
+    }
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 mb-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-secondary">
+                    <tr>
+                        <th class="px-4 py-3">Facebook</th>
+                        <th class="py-3">X</th>
+                        <th class="py-3">Instagram</th>
+                        <th class="py-3">LinkedIn</th>
+                        <th class="text-end px-4 py-3">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!hasSocialMedia)
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">Hesap bulunamadı.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.SocialMedias)
+                        {
+                            <tr>
+                                <td class="px-4 py-3">
+                                    <i class="fa-brands fa-facebook text-primary me-2"></i>
+                                    @(string.IsNullOrEmpty(item.Facebook) ? "-" : "Bağlı")
+                                </td>
+
+                                <!-- 🔥 X LOGO (SVG) -->
+                                <td class="py-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-2">
+                                        <path d="M12.6 0H15L9.5 6.2 16 16h-5.1L7.2 10.4 2.6 16H0l5.9-6.7L0 0h5.2l3.3 5L12.6 0z" />
+                                    </svg>
+                                    @(string.IsNullOrEmpty(item.X) ? "-" : "Bağlı")
+                                </td>
+
+                                <td class="py-3">
+                                    <i class="fa-brands fa-instagram text-danger me-2"></i>
+                                    @(string.IsNullOrEmpty(item.Instagram) ? "-" : "Bağlı")
+                                </td>
+
+                                <td class="py-3">
+                                    <i class="fa-brands fa-linkedin text-info me-2"></i>
+                                    @(string.IsNullOrEmpty(item.Linkedn) ? "-" : "Bağlı")
+                                </td>
+
+                                <td class="text-end px-4 py-3">
+                                    <a href="/AdminContactSettings/UpdateSocialMedia/@item.SocialMediaId" class="btn btn-sm px-3 py-2 rounded-3 border-0" style="background-color: #d97706; color:white;">
+                                        Güncelle
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
