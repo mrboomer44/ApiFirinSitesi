@@ -48,7 +48,32 @@ namespace DinamikFırınSitesiUı.Controllers
         public async Task<IActionResult> MarkAsRead(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.PutAsync($"https://localhost:7061/api/Message/MarkAsRead/{id}", null);
+
+            var getResponse = await client.GetAsync($"https://localhost:7061/api/Message/{id}");
+            if (!getResponse.IsSuccessStatusCode)
+            {
+                TempData["AdminMessageError"] = "Mesaj bulunamadı.";
+                return RedirectToAction("Index");
+            }
+
+            var jsonData = await getResponse.Content.ReadAsStringAsync();
+            var message = JsonConvert.DeserializeObject<UpdateMessageDto>(jsonData);
+
+            if (message == null)
+            {
+                TempData["AdminMessageError"] = "Mesaj bilgisi okunamadı.";
+                return RedirectToAction("Index");
+            }
+
+            message.Read = true;
+            var content = new StringContent(JsonConvert.SerializeObject(message), System.Text.Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync("https://localhost:7061/api/Message", content);
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                TempData["AdminMessageError"] = "Mesaj okundu olarak işaretlenemedi.";
+            }
+
             return RedirectToAction("Index");
         }
 
