@@ -21,9 +21,9 @@ namespace DinamikFırınSitesiAPI.Controllers
         }
 
         [HttpGet("{CounterId}")]
-        public IActionResult GetClıent(int CounterId)
+        public IActionResult GetCounter(int CounterId)
         {
-            var counter = _context.Clıents.Find(CounterId);
+            var counter = _context.Counters.Find(CounterId);
             return Ok(counter);
         }
 

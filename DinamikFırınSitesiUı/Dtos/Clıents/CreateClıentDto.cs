@@ -1,6 +1,6 @@
-﻿namespace DinamikFırınSitesiUı.Dtos.Clıents
+﻿namespace DinamikFırınSitesiUı.Dtos.Clients
 {
-    public class CreateClıentDto
+    public class CreateClientDto
     {
         public string Name { get; set; }
         public string SurName { get; set; }

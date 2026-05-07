@@ -1,0 +1,75 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Adouts.UpdateAboutDto
+
+@{
+    ViewData["Title"] = "Hakkımızda Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Üst Başlık ve Geri Dön Butonu -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold text-dark mb-0">Hakkımızda İçeriğini Güncelle</h5>
+    <a href="/AdminAbout/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="row">
+    <!-- Form Alanı -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 p-md-5">
+                <form action="/AdminAbout/UpdateAbout" method="post">
+                    
+                    <!-- GÜNCELLEME İÇİN GİZLİ ID -->
+                    <input type="hidden" name="AboutId" value="@Model.AboutId" />
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark mb-2">Başlık (Title)</label>
+                        <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="Title" value="@Model.Title" required />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark mb-2">Açıklama (Description)</label>
+                        <textarea class="form-control bg-light border-0 shadow-none" name="Description" rows="6" required>@Model.Description</textarea>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark mb-2">1. Görsel URL <span class="text-muted fw-normal small">(İmageUrl1)</span></label>
+                            <input type="text" class="form-control bg-light border-0 shadow-none" name="İmageUrl1" value="@Model.İmageUrl1" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark mb-2">2. Görsel URL <span class="text-muted fw-normal small">(İmageUrl2)</span></label>
+                            <input type="text" class="form-control bg-light border-0 shadow-none" name="İmageUrl2" value="@Model.İmageUrl2" required />
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end border-top pt-4">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none;">
+                            <i class="fa-solid fa-arrows-rotate me-2"></i> Değişiklikleri Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Önizleme Alanı -->
+    <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 text-center">
+                <h6 class="fw-bold text-dark mb-4">Mevcut Görsel Önizlemesi</h6>
+                
+                <div class="mb-4">
+                    <p class="text-muted small mb-2 fw-medium">1. Görsel</p>
+                    <img src="@Model.İmageUrl1" class="img-fluid rounded-4 shadow-sm" style="max-height: 180px; object-fit: cover; width: 100%;" alt="Hakkımızda 1" />
+                </div>
+
+                <div class="mb-2">
+                    <p class="text-muted small mb-2 fw-medium">2. Görsel</p>
+                    <img src="@Model.İmageUrl2" class="img-fluid rounded-4 shadow-sm" style="max-height: 180px; object-fit: cover; width: 100%;" alt="Hakkımızda 2" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

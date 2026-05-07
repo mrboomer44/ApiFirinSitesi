@@ -1,0 +1,47 @@
+﻿@model DinamikFırınSitesiUı.Dtos.AboutList.UpdateAboutListDto
+
+@{
+    ViewData["Title"] = "Maddeyi Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Üst Başlık ve Geri Dön Butonu -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Maddeyi Güncelle</h5>
+        <small class="text-muted">Seçtiğiniz özelliği aşağıdan düzenleyebilirsiniz.</small>
+    </div>
+    <!-- Ortak sayfaya (AdminAbout/Index) dönüyoruz -->
+    <a href="/AdminAbout/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 col-lg-8">
+    <div class="card-body p-4 p-md-5">
+        
+        <!-- Form Başlangıcı -->
+        <form action="/AdminAbout/UpdateAboutList" method="post">
+            
+            <!-- GÜNCELLEME İÇİN GİZLİ ID -->
+            <input type="hidden" name="AboutListId" value="@Model.AboutListId" />
+
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark mb-2">Madde İçeriği (Articles)</label>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-light border-0"><i class="fa-solid fa-check text-success"></i></span>
+                    <input type="text" class="form-control bg-light border-0 shadow-none" name="Articles" value="@Model.Articles" required />
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end border-top pt-4">
+                <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none; transition: 0.3s;">
+                    <i class="fa-solid fa-arrows-rotate me-2"></i> Değişiklikleri Kaydet
+                </button>
+            </div>
+            
+        </form>
+        <!-- Form Bitişi -->
+
+    </div>
+</div>

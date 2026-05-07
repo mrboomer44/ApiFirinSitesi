@@ -1,0 +1,34 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Galerys.CreateGaleryDto
+
+@{
+    ViewData["Title"] = "Yeni Fotoğraf";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold text-dark mb-0">Galeride Yeni Fotoğraf Ekle</h5>
+    <a href="/AdminGalery/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 col-lg-8">
+    <div class="card-body p-4 p-md-5">
+        <form action="/AdminGalery/AddGalery" method="post">
+            <div class="mb-5">
+                <label class="form-label fw-bold text-dark mb-2">Görsel URL Adresi (ImageUrl)</label>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-light border-0"><i class="fa-solid fa-link text-primary"></i></span>
+                    <input type="text" class="form-control bg-light border-0 shadow-none" name="ImageUrl" placeholder="https://..." required />
+                </div>
+                <small class="text-muted mt-2 d-block">İpucu: Resmin doğrudan linkini yapıştırın.</small>
+            </div>
+
+            <div class="d-flex justify-content-end border-top pt-4">
+                <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none;">
+                    <i class="fa-solid fa-cloud-arrow-up me-2"></i> Galeriyi Yayınla
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

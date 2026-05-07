@@ -1,8 +1,8 @@
-﻿namespace DinamikFırınSitesiUı.Dtos.Clıents
+﻿namespace DinamikFırınSitesiUı.Dtos.Clients
 {
-    public class ResultClıentDto
+    public class ResultClientDto
     {
-        public int ClıentId { get; set; }
+        public int ClientId { get; set; }
         public string Name { get; set; }
         public string SurName { get; set; }
         public string Description { get; set; }

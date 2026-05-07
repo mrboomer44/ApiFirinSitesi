@@ -1,0 +1,61 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Products.CreateProductDto
+
+@{
+    ViewData["Title"] = "Yeni Ürün Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold text-dark mb-0">Yeni Ürün Ekle</h5>
+    <a href="/AdminProduct/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 col-lg-8">
+    <div class="card-body p-4 p-md-5">
+        
+        <form action="/AdminProduct/AddProduct" method="post">
+            
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark mb-2">Ürün Adı (Title)</label>
+                <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="Title" placeholder="Örn: Ekşi Mayalı Köy Ekmeği" required />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark mb-2">Açıklama (Description)</label>
+                <textarea class="form-control bg-light border-0 shadow-none" name="Description" rows="4" placeholder="Ürünün içeriğini ve lezzetini anlatan kısa bir yazı..." required></textarea>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">Başlangıç Fiyatı (StrartPrice)</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-turkish-lira-sign text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="StrartPrice" placeholder="Örn: 15.00" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">Bitiş/Maksimum Fiyat (EndPrice)</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-turkish-lira-sign text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="EndPrice" placeholder="Örn: 25.00" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <label class="form-label fw-bold text-dark mb-2">Ürün Görseli URL (ImageUrl)</label>
+                <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="ImageUrl" placeholder="Görsel linkini giriniz..." required />
+            </div>
+
+            <div class="d-flex justify-content-end border-top pt-4">
+                <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none; transition: 0.3s;">
+                    <i class="fa-solid fa-plus me-2"></i> Ürünü Kaydet
+                </button>
+            </div>
+            
+        </form>
+
+    </div>
+</div>

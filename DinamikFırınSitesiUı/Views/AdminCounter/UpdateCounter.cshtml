@@ -1,0 +1,72 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Counters.UpdateCounterDto
+
+@{
+    ViewData["Title"] = "İstatistikleri Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Üst Başlık ve Geri Dön Butonu -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">İstatistikleri Güncelle</h5>
+        <small class="text-muted">Ana sayfada müşterilere gösterilen rakamları buradan değiştirebilirsiniz.</small>
+    </div>
+    <a href="/AdminCounter/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-4 p-md-5">
+        
+        <!-- Form Başlangıcı -->
+        <form action="/AdminCounter/UpdateCounter" method="post">
+            
+            <!-- GÜNCELLEME İÇİN GİZLİ ID (Controller'ın hangi veriyi güncelleyeceğini bilmesi için şart) -->
+            <input type="hidden" name="CounterId" value="@Model.CounterId" />
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">1. Yıllık Deneyim <span class="text-muted fw-normal small">(Years Experience)</span></label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-certificate text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="Counter1" value="@Model.Counter1" required />
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">2. Uzman Personel <span class="text-muted fw-normal small">(Skilled Professionals)</span></label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-users text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="Counter2" value="@Model.Counter2" required />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">3. Toplam Ürün <span class="text-muted fw-normal small">(Total Products)</span></label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-bread-slice text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="Counter3" value="@Model.Counter3" required />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">4. Günlük Sipariş <span class="text-muted fw-normal small">(Order Everyday)</span></label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-cart-plus text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="Counter4" value="@Model.Counter4" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end border-top pt-4 mt-2">
+                <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none; transition: 0.3s;">
+                    <i class="fa-solid fa-arrows-rotate me-2"></i> Değişiklikleri Kaydet
+                </button>
+            </div>
+            
+        </form>
+        <!-- Form Bitişi -->
+
+    </div>
+</div>

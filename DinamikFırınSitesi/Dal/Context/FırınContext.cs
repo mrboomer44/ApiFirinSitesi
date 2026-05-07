@@ -12,7 +12,7 @@ namespace DinamikFırınSitesi.Dal.Context
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<AboutList> AboutLists { get; set; }
-        public DbSet<Clıent> Clıents { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<Communication> Communications { get; set; }
         public DbSet<Counter> Counters { get; set; }
         public DbSet<Galery> Galeries { get; set; }
@@ -24,7 +24,6 @@ namespace DinamikFırınSitesi.Dal.Context
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet <Banner> Banners { get; set; }
-        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<NewsletterEmail> NewsletterEmails { get; set; }
         public DbSet<login> logins { get; set; }
     }

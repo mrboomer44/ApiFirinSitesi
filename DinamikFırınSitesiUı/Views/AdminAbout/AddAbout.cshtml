@@ -1,0 +1,62 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Adouts.CreateAboutDto
+
+@{
+    ViewData["Title"] = "Hakkımızda İçeriği Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Üst Başlık ve Geri Dön Butonu -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Hakkımızda İçeriği Ekle</h5>
+        <small class="text-muted">Sitenin ana sayfasında yer alacak hakkımızda metnini ve görsellerini girin.</small>
+    </div>
+    <a href="/AdminAbout/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 col-lg-9">
+    <div class="card-body p-4 p-md-5">
+        
+        <!-- Form Başlangıcı -->
+        <form action="/AdminAbout/AddAbout" method="post">
+            
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark mb-2">Başlık (Title)</label>
+                <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="Title" placeholder="Örn: 20 Yıllık Lezzet Serüveni..." required />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark mb-2">Açıklama Metni (Description)</label>
+                <textarea class="form-control bg-light border-0 shadow-none" name="Description" rows="5" placeholder="Fırınınızın tarihçesini ve vizyonunu anlatan bir metin girin..." required></textarea>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">1. Görsel URL <span class="text-muted fw-normal small">(İmageUrl1)</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-image text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="İmageUrl1" placeholder="Resim 1 linkini girin..." required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-dark mb-2">2. Görsel URL <span class="text-muted fw-normal small">(İmageUrl2)</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0"><i class="fa-solid fa-images text-primary"></i></span>
+                        <input type="text" class="form-control bg-light border-0 shadow-none" name="İmageUrl2" placeholder="Resim 2 linkini girin..." required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end border-top pt-4">
+                <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none; transition: 0.3s;">
+                    <i class="fa-solid fa-check me-2"></i> İçeriği Kaydet
+                </button>
+            </div>
+            
+        </form>
+        <!-- Form Bitişi -->
+
+    </div>
+</div>

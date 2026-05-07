@@ -1,0 +1,45 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Galerys.UpdateGaleryDto
+
+@{
+    ViewData["Title"] = "Fotoğraf Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold text-dark mb-0">Görseli Güncelle</h5>
+    <a href="/AdminGalery/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 p-md-5">
+                <form action="/AdminGalery/UpdateGalery" method="post">
+                    <input type="hidden" name="GaleryId" value="@Model.GaleryId" />
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark mb-2">Yeni Görsel URL</label>
+                        <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="ImageUrl" value="@Model.ImageUrl" required />
+                    </div>
+
+                    <div class="d-flex justify-content-end border-top pt-4">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none;">
+                            <i class="fa-solid fa-arrows-rotate me-2"></i> Değişiklikleri Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5 mt-4 mt-lg-0">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 text-center">
+                <h6 class="fw-bold text-dark mb-3">Mevcut Görsel</h6>
+                <img src="@Model.ImageUrl" class="img-fluid rounded-4 shadow-sm" style="max-height: 250px; width: 100%; object-fit: cover;" />
+            </div>
+        </div>
+    </div>
+</div>

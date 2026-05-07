@@ -43,7 +43,7 @@ namespace DinamikFırınSitesiAPI.Controllers
             return Ok("Güncelleme işlemi tamamlandı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{AboutListId}")]
         public IActionResult DeleteAboutList(int AboutListId)
         {
             _context.AboutLists.Remove(_context.AboutLists.Find(AboutListId));

@@ -43,10 +43,15 @@ namespace DinamikFırınSitesiAPI.Controllers
             return Ok("Güncelleme işlemi tamamlandı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{TeamId}")]
         public IActionResult DeleteTeam(int TeamId)
         {
-            _context.Teams.Remove(_context.Teams.Find(TeamId));
+            var entity = _context.Teams.Find(TeamId);
+            if (entity == null)
+            {
+                return NotFound("Kayıt bulunamadı.");
+            }
+            _context.Teams.Remove(entity);
             _context.SaveChanges();
             return Ok("Silme işlemi tamamlandı");
 

@@ -1,8 +1,12 @@
-﻿namespace AkademiqDinamikFırınSitesiApi.Dal.Entitys
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AkademiqDinamikFırınSitesiApi.Dal.Entitys
 {
-    public class Clıent
+    [Table("Clıents")]
+    public class Client
     {
-        public int ClıentId { get; set; }
+        [Column("ClıentId")]
+        public int ClientId { get; set; }
         public string Name { get; set; }
         public string SurName { get; set; }
         public string Description { get; set; }

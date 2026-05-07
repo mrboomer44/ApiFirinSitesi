@@ -67,13 +67,14 @@ namespace DinamikFırınSitesiAPI.Migrations
                     b.ToTable("AboutLists");
                 });
 
-            modelBuilder.Entity("AkademiqDinamikFırınSitesiApi.Dal.Entitys.Clıent", b =>
+            modelBuilder.Entity("AkademiqDinamikFırınSitesiApi.Dal.Entitys.Client", b =>
                 {
-                    b.Property<int>("ClıentId")
+                    b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ClıentId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClıentId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -91,7 +92,7 @@ namespace DinamikFırınSitesiAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ClıentId");
+                    b.HasKey("ClientId");
 
                     b.ToTable("Clıents");
                 });
@@ -413,23 +414,6 @@ namespace DinamikFırınSitesiAPI.Migrations
                     b.HasKey("NewsletterEmailId");
 
                     b.ToTable("NewsletterEmails");
-                });
-
-            modelBuilder.Entity("DinamikFırınSitesiAPI.Dal.Entitys.PhoneNumber", b =>
-                {
-                    b.Property<int>("PhoneNumberId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PhoneNumberId"));
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PhoneNumberId");
-
-                    b.ToTable("PhoneNumbers");
                 });
 
             modelBuilder.Entity("DinamikFırınSitesiAPI.Dal.Entitys.login", b =>

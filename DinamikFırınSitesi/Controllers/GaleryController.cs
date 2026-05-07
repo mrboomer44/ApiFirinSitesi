@@ -43,7 +43,7 @@ namespace DinamikFırınSitesiAPI.Controllers
             return Ok("Güncelleme işlemi tamamlandı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{GaleryId}")]
         public IActionResult DeleteGalery(int GaleryId)
         {
             _context.Galeries.Remove(_context.Galeries.Find(GaleryId));

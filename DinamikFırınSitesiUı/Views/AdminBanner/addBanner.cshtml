@@ -1,0 +1,70 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Banners.CreateBannerDto
+
+@{
+    ViewData["Title"] = "Yeni Afiş Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Üst Başlık ve Geri Dön Butonu -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold text-dark mb-0">Yeni Banner (Afiş) Ekle</h5>
+    <a href="/AdminBanner/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-4 p-md-5">
+                
+                <!-- Form Başlangıcı -->
+                <form action="/AdminBanner/AddBanner" method="post">
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark mb-2">Etiket (Ticket)</label>
+                        <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="Ticket" placeholder="Örn: Taze Çıktı!, Fırsat..." required />
+                        <div class="form-text text-muted small mt-2"><i class="fa-solid fa-circle-info me-1"></i> Afişin üzerinde dikkat çekici küçük etiket yazısı.</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark mb-2">Başlık (Title)</label>
+                        <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="Title" placeholder="Örn: Pazar Kahvaltısına Özel Sıcak Simitler" required />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark mb-2">Açıklama (Description)</label>
+                        <textarea class="form-control bg-light border-0 shadow-none" name="Description" rows="4" placeholder="Afiş üzerinde yer alacak tanıtım metnini giriniz..." required></textarea>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="form-label fw-bold text-dark mb-2">Görsel URL (ImageUrl)</label>
+                        <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="ImageUrl" placeholder="Örn: /images/banner1.jpg veya https://..." required />
+                        <div class="form-text text-muted small mt-2"><i class="fa-solid fa-image me-1"></i> Şimdilik görselin linkini veya proje içindeki dosya yolunu ekleyebilirsiniz.</div>
+                    </div>
+
+                    <div class="d-flex justify-content-end border-top pt-4">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold" style="background-color: #d97706; border: none;">
+                            <i class="fa-solid fa-check me-2"></i> Afişi Kaydet
+                        </button>
+                    </div>
+
+                </form>
+                <!-- Form Bitişi -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Sağ Tarafa İsteğe Bağlı Bilgi Kartı -->
+    <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="card border-0 shadow-sm rounded-4 bg-warning bg-opacity-10 h-100">
+            <div class="card-body p-4">
+                <h6 class="fw-bold text-dark mb-3"><i class="fa-regular fa-lightbulb text-warning me-2"></i> İpucu</h6>
+                <p class="text-secondary small mb-0">
+                    Afiş görsellerinizin geniş çözünürlükte (Örn: 1920x1080px) olmasına dikkat edin. Eklediğiniz bu bannerlar anında sitenin ana sayfasında müşterilerinize gösterilecektir. Başlık ve açıklamaları kısa tutmak okunabilirliği artırır.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

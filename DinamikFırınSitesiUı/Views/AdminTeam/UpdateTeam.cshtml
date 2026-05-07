@@ -1,0 +1,100 @@
+﻿@model DinamikFırınSitesiUı.Dtos.Teams.UpdateTeamDto
+
+@{
+    ViewData["Title"] = "Personel Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold text-dark mb-0">Personel Bilgilerini Güncelle</h5>
+    <a href="/AdminTeam/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="row">
+    <!-- Form Alanı -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 p-md-5">
+                <form action="/AdminTeam/UpdateTeam" method="post">
+                    
+                    <input type="hidden" name="TeamId" value="@Model.TeamId" />
+
+                    <h6 class="text-uppercase text-muted fw-bold mb-3"><i class="fa-solid fa-user me-2"></i>Kişisel Bilgiler</h6>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark mb-2">Adı (Name)</label>
+                            <input type="text" class="form-control bg-light border-0 shadow-none" name="Name" value="@Model.Name" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark mb-2">Soyadı (Surname)</label>
+                            <input type="text" class="form-control bg-light border-0 shadow-none" name="Surname" value="@Model.Surname" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark mb-2">Pozisyon (Position)</label>
+                            <input type="text" class="form-control bg-light border-0 shadow-none" name="Position" value="@Model.Position" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark mb-2">Fotoğraf URL (ImageUrl)</label>
+                            <input type="text" class="form-control bg-light border-0 shadow-none" name="ImageUrl" value="@Model.ImageUrl" required />
+                        </div>
+                    </div>
+
+                    <h6 class="text-uppercase text-muted fw-bold mb-3 mt-5"><i class="fa-solid fa-hashtag me-2"></i>Sosyal Medya Bağlantıları</h6>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label text-dark mb-2">Facebook</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fa-brands fa-facebook text-primary"></i></span>
+                                <input type="text" class="form-control bg-light border-0 shadow-none" name="Facebook" value="@Model.Facebook" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label text-dark mb-2">X (Twitter)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fa-brands fa-x-twitter text-dark"></i></span>
+                                <input type="text" class="form-control bg-light border-0 shadow-none" name="X" value="@Model.X" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label text-dark mb-2">Instagram</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fa-brands fa-instagram text-danger"></i></span>
+                                <input type="text" class="form-control bg-light border-0 shadow-none" name="Instagram" value="@Model.Instagram" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end border-top pt-4 mt-4">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none;">
+                            <i class="fa-solid fa-arrows-rotate me-2"></i> Değişiklikleri Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Önizleme Alanı -->
+    <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 text-center">
+                <h6 class="fw-bold text-dark mb-4">Personel Önizlemesi</h6>
+                
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" class="rounded-circle shadow-sm mb-3" style="width: 150px; height: 150px; object-fit: cover;" alt="@Model.Name" />
+                }
+                else
+                {
+                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 150px; height: 150px;">
+                        <span class="text-muted"><i class="fa-solid fa-user fs-1"></i></span>
+                    </div>
+                }
+                <h5 class="fw-bold text-dark mb-1">@Model.Name @Model.Surname</h5>
+                <p class="text-muted small">@Model.Position</p>
+            </div>
+        </div>
+    </div>
+</div>

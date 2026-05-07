@@ -1,0 +1,128 @@
+﻿@model DinamikFırınSitesiUı.Models.AboutViewModel
+
+@{
+    ViewData["Title"] = "Hakkımızda Yönetimi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    // Ana içeriğin varlık kontrolü
+    bool hasAboutData = Model.Abouts != null && Model.Abouts.Any();
+}
+
+<!-- ========================================== -->
+<!-- BÖLÜM 1: ANA İÇERİK YÖNETİMİ TABLOSU -->
+<!-- ========================================== -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Hakkımızda (Ana İçerik)</h5>
+        <small class="text-muted">Sitenin hakkımızda kısmındaki başlık, ana metin ve görseller.</small>
+    </div>
+    @if (!hasAboutData)
+    {
+        <!-- Sadece Controller yönlendirmelerine dikkat et (Kendi yazdığın controller ismine göre) -->
+        <a href="/AdminAbout/AddAbout" class="btn btn-primary rounded-pill px-4 fw-medium" style="background-color: #d97706; border: none;">
+            <i class="fa-solid fa-plus me-2"></i> İçeriği Oluştur
+        </a>
+    }
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 mb-5">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-secondary">
+                    <tr>
+                        <th class="border-0 px-4 py-3" style="width: 130px;">Görseller</th>
+                        <th class="border-0 py-3">Başlık (Title)</th>
+                        <th class="border-0 py-3">Açıklama (Description)</th>
+                        <th class="border-0 text-end px-4 py-3" style="width: 150px;">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody class="border-top-0">
+                    @if (!hasAboutData)
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center py-4 text-muted">Ana içerik bulunamadı. Lütfen ekleyin.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.Abouts)
+                        {
+                            <tr>
+                                <td class="px-4 py-3">
+                                    <div class="d-flex gap-2">
+                                        <img src="@item.İmageUrl1" class="rounded shadow-sm" style="width: 45px; height: 45px; object-fit: cover;">
+                                        <img src="@item.İmageUrl2" class="rounded shadow-sm" style="width: 45px; height: 45px; object-fit: cover;">
+                                    </div>
+                                </td>
+                                <td class="py-3 fw-bold text-dark">@item.Title</td>
+                                <td class="py-3 text-secondary text-truncate" style="max-width: 300px;">@item.Description</td>
+                                <td class="text-end px-4 py-3">
+                                    <a href="/AdminAbout/UpdateAbout/@item.AboutId" class="btn btn-sm btn-primary px-3 py-2 rounded-3 border-0" style="background-color: #d97706;">
+                                        <i class="fa-solid fa-pen-to-square me-1"></i> Güncelle
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- BÖLÜM 2: MADDELER (ABOUT LIST) TABLOSU -->
+<!-- ========================================== -->
+<div class="d-flex justify-content-between align-items-center mb-4 border-top pt-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Hakkımızda Maddeleri (Listesi)</h5>
+        <small class="text-muted">Açıklamanın altında tik işaretiyle gösterilen avantaj/özellik listesi.</small>
+    </div>
+    <!-- Madde ekleme işlemi kendi action'ına (örn: AdminAboutListController) gitmeli -->
+    <a href="/AdminAbout/AddAboutList" class="btn btn-primary rounded-pill px-4 fw-medium" style="background-color: #d97706; border: none;">
+        <i class="fa-solid fa-plus me-2"></i> Yeni Madde Ekle
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 mb-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-secondary">
+                    <tr>
+                        <th class="border-0 px-4 py-3" style="width: 50px;">#</th>
+                        <th class="border-0 py-3">Madde Metni (Articles)</th>
+                        <th class="border-0 text-end px-4 py-3" style="width: 150px;">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody class="border-top-0">
+                    @if (Model.AboutLists == null || !Model.AboutLists.Any())
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center py-4 text-muted">Henüz listeye madde eklenmemiş.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.AboutLists)
+                        {
+                            <tr>
+                                <td class="px-4 py-3 text-success"><i class="fa-solid fa-check"></i></td>
+                                <td class="py-3 fw-bold text-dark">@item.Articles</td>
+                                <td class="text-end px-4 py-3">
+                                    <a href="/AdminAbout/UpdateAboutList/@item.AboutListId" class="btn btn-sm btn-light border text-primary me-2">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="/AdminAbout/DeleteAboutList/@item.AboutListId" class="btn btn-sm btn-light border text-danger" onclick="return confirm('Bu maddeyi silmek istediğinize emin misiniz?');">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DinamikFırınSitesiUı.Dtos.Galerys.ResultGaleryDto>
+
+@{
+    ViewData["Title"] = "Galeri Yönetimi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int imageCount = Model?.Count() ?? 0;
+    int maxLimit = 12;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Galeri Yönetimi</h5>
+        <small class="text-muted">Sitede sergilenecek görseller (Maksimum @maxLimit Adet).</small>
+    </div>
+
+    @if (imageCount < maxLimit)
+    {
+        <a href="/AdminGalery/AddGalery" class="btn btn-primary rounded-pill px-4 fw-medium" style="background-color: #d97706; border: none;">
+            <i class="fa-solid fa-plus me-2"></i> Yeni Fotoğraf Ekle
+        </a>
+    }
+    else
+    {
+        <div class="badge bg-danger rounded-pill px-3 py-2">
+            <i class="fa-solid fa-circle-exclamation me-1"></i> Fotoğraf Limitine Ulaşıldı (@maxLimit/@maxLimit)
+        </div>
+    }
+</div>
+
+@if (imageCount >= maxLimit)
+{
+    <div class="alert alert-info border-0 shadow-sm rounded-4 mb-4">
+        <i class="fa-solid fa-info-circle me-2"></i> <strong>Bilgi:</strong> Galeri kapasitesi dolu. Yeni bir fotoğraf eklemek için lütfen mevcut fotoğraflardan birini silin.
+    </div>
+}
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-4">
+        <div class="row g-4">
+            @if (Model == null || !Model.Any())
+            {
+                <div class="col-12 text-center py-5 text-muted">
+                    <i class="fa-regular fa-image fs-1 mb-3" style="color: #dee2e6;"></i><br />
+                    Galeride henüz hiç fotoğraf yok.
+                </div>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-lg-3">
+                        <div class="position-relative overflow-hidden rounded-4 shadow-sm group">
+                            <img src="@item.ImageUrl" class="img-fluid w-100" style="height: 200px; object-fit: cover;" alt="Galeri Görseli">
+                            <div class="position-absolute top-0 end-0 p-2">
+                                <div class="d-flex flex-column gap-2">
+                                    <a href="/AdminGalery/UpdateGalery/@item.GaleryId" class="btn btn-sm btn-white bg-white shadow-sm text-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; line-height: 32px;">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="/AdminGalery/DeleteGalery/@item.GaleryId" class="btn btn-sm btn-white bg-white shadow-sm text-danger rounded-circle" style="width: 32px; height: 32px; padding: 0; line-height: 32px;" onclick="return confirm('Bu fotoğrafı silmek istediğinize emin misiniz?');">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

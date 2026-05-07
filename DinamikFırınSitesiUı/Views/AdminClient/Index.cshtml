@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DinamikFırınSitesiUı.Dtos.Clients.ResultClientDto>
+
+@{
+    ViewData["Title"] = "Müşteri Yorumları";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Müşteri Yorumları Yönetimi</h5>
+        <small class="text-muted">Müşterilerinizin fırınınız hakkındaki düşüncelerini buradan yönetebilirsiniz.</small>
+    </div>
+    <a href="/AdminClient/AddClient" class="btn btn-primary rounded-pill px-4 fw-medium" style="background-color: #d97706; border: none;">
+        <i class="fa-solid fa-plus me-2"></i> Yeni Yorum Ekle
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-secondary">
+                    <tr>
+                        <th class="border-0 px-4 py-3" style="width: 90px;">Fotoğraf</th>
+                        <th class="border-0 py-3">Ad Soyad</th>
+                        <th class="border-0 py-3">Yorum (Description)</th>
+                        <th class="border-0 text-end px-4 py-3" style="width: 150px;">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody class="border-top-0">
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center py-5 text-muted">
+                                <i class="fa-solid fa-comments fs-1 mb-3" style="color: #dee2e6;"></i><br />
+                                Henüz eklenmiş bir müşteri yorumu bulunmuyor.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="px-4 py-3">
+                                    <img src="@item.ImageUrl" class="rounded-circle shadow-sm" style="width: 55px; height: 55px; object-fit: cover;" alt="@item.Name">
+                                </td>
+                                <td class="py-3 fw-bold text-dark">@item.Name @item.SurName</td>
+                                <td class="py-3 text-secondary text-truncate" style="max-width: 350px;">
+                                    <i class="fa-solid fa-quote-left text-warning me-2 opacity-50"></i>@item.Description
+                                </td>
+                                <td class="text-end px-4 py-3">
+                                    <a href="/AdminClient/UpdateClient/@item.ClientId" class="btn btn-sm btn-light border text-primary me-2">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="/AdminClient/DeleteClient/@item.ClientId" class="btn btn-sm btn-light border text-danger" onclick="return confirm('Bu yorumu silmek istediğinize emin misiniz?');">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

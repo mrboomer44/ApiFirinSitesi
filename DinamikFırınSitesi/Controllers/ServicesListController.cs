@@ -43,10 +43,16 @@ namespace DinamikFırınSitesiAPI.Controllers
             return Ok("Güncelleme işlemi tamamlandı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ServicesListId}")]
         public IActionResult DeleteServicesList(int ServicesListId)
         {
-            _context.ServicesList.Remove(_context.ServicesList.Find(ServicesListId));
+            var entity = _context.ServicesList.Find(ServicesListId);
+            if (entity == null)
+            {
+                return NotFound("Silinecek hizmet bulunamadı");
+            }
+
+            _context.ServicesList.Remove(entity);
             _context.SaveChanges();
             return Ok("Silme işlemi tamamlandı");
 

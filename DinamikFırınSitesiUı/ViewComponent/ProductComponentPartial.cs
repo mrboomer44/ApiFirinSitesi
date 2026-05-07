@@ -1,4 +1,6 @@
-﻿using DinamikFırınSitesiUı.Dtos.Products;
+﻿using DinamikFırınSitesiUı.Dtos.Communications;
+using DinamikFırınSitesiUı.Dtos.Products;
+using DinamikFırınSitesiUı.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -13,15 +15,25 @@ namespace DinamikFırınSitesiUı.ViewComponent
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient(); 
+            var model = new ProductViewModel();
+
             var responseMessage = await client.GetAsync("https://localhost:7061/api/Product");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
-                return View(values);
+                model.Products = values ?? new List<ResultProductDto>();
             }
-            return View();
+
+            var communicationResponse = await client.GetAsync("https://localhost:7061/api/Communication");
+            if (communicationResponse.IsSuccessStatusCode)
+            {
+                var jsonData = await communicationResponse.Content.ReadAsStringAsync();
+                var communicationValues = JsonConvert.DeserializeObject<List<ResultCommunicationDto>>(jsonData);
+                model.Phone = communicationValues?.FirstOrDefault()?.Phone;
+            }
+            return View(model);
         }
     }
 }

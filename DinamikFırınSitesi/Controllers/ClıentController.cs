@@ -6,47 +6,52 @@ namespace DinamikFırınSitesiAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClıentController : ControllerBase
+    public class ClientController : ControllerBase
     {
         private readonly FırınContext _context;
-        public ClıentController(FırınContext context)
+        public ClientController(FırınContext context)
         {
             _context = context;
         }
         [HttpGet]
-        public IActionResult GetClıents()
+        public IActionResult GetClients()
         {
-            var clıents = _context.Clıents.ToList();
-            return Ok(clıents);
+            var clients = _context.Clients.ToList();
+            return Ok(clients);
         }
 
-        [HttpGet("{ClıentId}")]
-        public IActionResult GetClıent(int ClıentId)
+        [HttpGet("{clientId}")]
+        public IActionResult GetClient(int clientId)
         {
-            var clıent = _context.Clıents.Find(ClıentId);
-            return Ok(clıent);
+            var client = _context.Clients.Find(clientId);
+            return Ok(client);
         }
 
         [HttpPost]
-        public IActionResult CreateClıent(Clıent clıent)
+        public IActionResult CreateClient(Client client)
         {
-            _context.Clıents.Add(clıent);
+            _context.Clients.Add(client);
             _context.SaveChanges();
             return Ok("Ekleme işlemi tamamlandı");
         }
 
         [HttpPut]
-        public IActionResult UpdateCLıent(Clıent clıent)
+        public IActionResult UpdateClient(Client client)
         {
-            _context.Clıents.Update(clıent);
+            _context.Clients.Update(client);
             _context.SaveChanges();
             return Ok("Güncelleme işlemi tamamlandı");
         }
 
         [HttpDelete]
-        public IActionResult DeleteClıent(int ClıentId)
+        public IActionResult DeleteClient(int clientId)
         {
-            _context.Clıents.Remove(_context.Clıents.Find(ClıentId));
+            var entity = _context.Clients.Find(clientId);
+            if (entity == null)
+            {
+                return NotFound("Kayıt bulunamadı.");
+            }
+            _context.Clients.Remove(entity);
             _context.SaveChanges();
             return Ok("Silme işlemi tamamlandı");
 

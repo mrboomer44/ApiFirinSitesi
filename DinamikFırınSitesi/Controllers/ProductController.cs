@@ -1,4 +1,4 @@
-﻿using AkademiqDinamikFırınSitesiApi.Dal.Entitys;
+using AkademiqDinamikFırınSitesiApi.Dal.Entitys;
 using DinamikFırınSitesi.Dal.Context;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,7 +43,7 @@ namespace DinamikFırınSitesiAPI.Controllers
             return Ok("Güncelleme işlemi tamamlandı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ProductId}")]
         public IActionResult DeleteProduct(int ProductId)
         {
             _context.Products.Remove(_context.Products.Find(ProductId));

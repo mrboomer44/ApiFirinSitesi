@@ -1,4 +1,4 @@
-﻿@model List<DinamikFırınSitesiUı.Dtos.Products.ResultProductDto>
+﻿@model DinamikFırınSitesiUı.Models.ProductViewModel
 
 <div class="container-xxl bg-light my-6 py-6 pt-0">
     <div class="container">
@@ -12,7 +12,7 @@
                         <i class="fa fa-phone-alt fa-4x flex-shrink-0"></i>
                         <div class="ms-4">
                             <p class="fs-5 fw-bold mb-0">Call Us</p>
-                            <p class="fs-1 fw-bold mb-0">+012 345 6789</p>
+                            <p class="fs-1 fw-bold mb-0">@Model.Phone</p>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
         </div>
         <div class="row g-4">
            
-            @foreach (var item in Model)
+            @foreach (var item in Model.Products)
             {
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">

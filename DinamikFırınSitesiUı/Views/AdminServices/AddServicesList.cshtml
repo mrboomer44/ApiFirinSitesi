@@ -1,0 +1,38 @@
+﻿@model DinamikFırınSitesiUı.Dtos.ServicesList.CreateServicesListDto
+
+@{
+    ViewData["Title"] = "Hizmet Maddesi Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h5 class="fw-bold text-dark mb-0">Hizmet Detayı Ekle</h5>
+        <small class="text-muted">Müşterilerinize sunduğunuz belirli bir hizmeti tanımlayın.</small>
+    </div>
+    <a href="/AdminServices/Index" class="btn btn-light border text-secondary rounded-pill px-4 fw-medium">
+        <i class="fa-solid fa-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 col-lg-8">
+    <div class="card-body p-4 p-md-5">
+        <form action="/AdminServices/AddServicesList" method="post">
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark mb-2">Hizmet Başlığı (Title)</label>
+                <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none" name="Title" placeholder="Örn: Toplu Sipariş" required />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark mb-2">Hizmet Açıklaması (Description)</label>
+                <textarea class="form-control bg-light border-0 shadow-none" name="Description" rows="4" placeholder="Hizmet detaylarını girin..." required></textarea>
+            </div>
+
+            <div class="d-flex justify-content-end border-top pt-4">
+                <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #d97706; border: none;">
+                    <i class="fa-solid fa-plus me-2"></i> Hizmeti Ekle
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
