@@ -15,10 +15,10 @@ namespace DinamikFırınSitesiUı.ViewComponent
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient(); 
+            var client = _httpClientFactory.CreateClient("FirinApi"); 
             var model = new ProductViewModel();
 
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/Product");
+            var responseMessage = await client.GetAsync("api/Product");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -26,7 +26,7 @@ namespace DinamikFırınSitesiUı.ViewComponent
                 model.Products = values ?? new List<ResultProductDto>();
             }
 
-            var communicationResponse = await client.GetAsync("https://localhost:7061/api/Communication");
+            var communicationResponse = await client.GetAsync("api/Communication");
             if (communicationResponse.IsSuccessStatusCode)
             {
                 var jsonData = await communicationResponse.Content.ReadAsStringAsync();

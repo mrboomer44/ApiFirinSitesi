@@ -86,8 +86,8 @@ namespace DinamikFırınSitesiUı.Controllers
             bool loginSuccess = false;
             try
             {
-                var client = _httpClientFactory.CreateClient();
-                var response = await client.GetAsync("https://localhost:7061/api/login");
+                var client = _httpClientFactory.CreateClient("FirinApi");
+                var response = await client.GetAsync("/api/login");
 
                 if (response.IsSuccessStatusCode)
                 {

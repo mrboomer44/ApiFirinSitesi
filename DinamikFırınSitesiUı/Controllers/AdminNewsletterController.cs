@@ -1,4 +1,4 @@
-﻿using DinamikFırınSitesiUı.Dtos.NewsletterEmail;
+using DinamikFırınSitesiUı.Dtos.NewsletterEmail;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -13,8 +13,8 @@ namespace DinamikFırınSitesiUı.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseNewsletter = await client.GetAsync("https://localhost:7061/api/NewsletterEmail");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseNewsletter = await client.GetAsync("api/NewsletterEmail");
             if (responseNewsletter.IsSuccessStatusCode)
             {
                 var jsonData = await responseNewsletter.Content.ReadAsStringAsync();
@@ -26,8 +26,8 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteNewsletter(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7061/api/NewsletterEmail?NewsletterEmailId={id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.DeleteAsync($"api/NewsletterEmail?NewsletterEmailId={id}");
             return RedirectToAction("Index");
         }
     }

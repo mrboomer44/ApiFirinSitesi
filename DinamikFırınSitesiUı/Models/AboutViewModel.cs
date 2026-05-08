@@ -1,8 +1,5 @@
 ﻿using DinamikFırınSitesiUı.Dtos.AboutList;
-using DinamikFırınSitesiUı.Dtos.AboutList;
 using DinamikFırınSitesiUı.Dtos.Adouts;
-using DinamikFırınSitesiUı.Dtos.Adouts;
-using System.Collections.Generic;
 
 namespace DinamikFırınSitesiUı.Models
 {

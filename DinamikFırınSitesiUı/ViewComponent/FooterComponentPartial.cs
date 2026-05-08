@@ -1,4 +1,4 @@
-﻿using DinamikFırınSitesiUı.Dtos.Communications;
+using DinamikFırınSitesiUı.Dtos.Communications;
 using DinamikFırınSitesiUı.Dtos.Galerys;
 using DinamikFırınSitesiUı.Dtos.SocialMedias;
 using DinamikFırınSitesiUı.Models;
@@ -18,10 +18,10 @@ namespace DinamikFırınSitesiUı.ViewComponent
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var model = new FooterViewModel();
 
-            var communicationResponse = await client.GetAsync("https://localhost:7061/api/Communication");
+            var communicationResponse = await client.GetAsync("api/Communication");
             if (communicationResponse.IsSuccessStatusCode)
             {
                 var jsonData = await communicationResponse.Content.ReadAsStringAsync();
@@ -29,7 +29,7 @@ namespace DinamikFırınSitesiUı.ViewComponent
                 model.Communication = communicationValues?.FirstOrDefault();
             }
 
-            var socialMediaResponse = await client.GetAsync("https://localhost:7061/api/SocialMedia");
+            var socialMediaResponse = await client.GetAsync("api/SocialMedia");
             if (socialMediaResponse.IsSuccessStatusCode)
             {
                 var jsonData = await socialMediaResponse.Content.ReadAsStringAsync();
@@ -37,7 +37,7 @@ namespace DinamikFırınSitesiUı.ViewComponent
                 model.SocialMedia = socialMediaValues?.FirstOrDefault();
             }
 
-            var galeryResponse = await client.GetAsync("https://localhost:7061/api/Galery");
+            var galeryResponse = await client.GetAsync("api/Galery");
             if (galeryResponse.IsSuccessStatusCode)
             {
                 var jsonData = await galeryResponse.Content.ReadAsStringAsync();

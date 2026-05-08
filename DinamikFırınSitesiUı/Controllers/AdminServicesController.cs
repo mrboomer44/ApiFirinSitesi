@@ -17,17 +17,17 @@ namespace DinamikFırınSitesiUı.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var viewModel = new ServicesViewModel();
 
-            var response = await client.GetAsync("https://localhost:7061/api/Services");
+            var response = await client.GetAsync("/api/Services");
             if (response.IsSuccessStatusCode)
             {
                 var ServicesJson = await response.Content.ReadAsStringAsync();
                 viewModel.Services = JsonConvert.DeserializeObject<List<ResultServicesDto>>(ServicesJson);
             }
 
-            var responseList = await client.GetAsync("https://localhost:7061/api/ServicesList");
+            var responseList = await client.GetAsync("/api/ServicesList");
             if (responseList.IsSuccessStatusCode)
             {
                 var ServicesListJson = await responseList.Content.ReadAsStringAsync();
@@ -44,10 +44,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddServices(CreateServicesDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/Services", stringContent);
+            var responseMessage = await client.PostAsync("/api/Services", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -57,10 +57,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateServices(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
 
             // ÇÖZÜM: Boş dönen tekil GetById API'si yerine listeyi çekip eşleşeni alıyoruz
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/Services");
+            var responseMessage = await client.GetAsync("/api/Services");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -83,12 +83,12 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateServices(UpdateServicesDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             var content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
             // API Update isteği
-            var response = await client.PutAsync("https://localhost:7061/api/Services", content);
+            var response = await client.PutAsync("/api/Services", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -105,10 +105,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddServicesList(CreateServicesListDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/ServicesList", stringContent);
+            var responseMessage = await client.PostAsync("/api/ServicesList", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -118,10 +118,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateServicesList(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
 
             // ÇÖZÜM: Boş dönen tekil GetById API'si yerine listeyi çekip eşleşeni alıyoruz
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/ServicesList");
+            var responseMessage = await client.GetAsync("/api/ServicesList");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -143,12 +143,12 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateServicesList(UpdateServicesListDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             var content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
             // API Update isteği
-            var response = await client.PutAsync("https://localhost:7061/api/ServicesList", content);
+            var response = await client.PutAsync("/api/ServicesList", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -160,8 +160,8 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteServicesList(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.DeleteAsync($"https://localhost:7061/api/ServicesList/{id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var response = await client.DeleteAsync($"/api/ServicesList/{id}");
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

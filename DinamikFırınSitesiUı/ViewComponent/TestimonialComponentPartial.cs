@@ -1,4 +1,4 @@
-﻿using DinamikFırınSitesiUı.Dtos.Clients;
+using DinamikFırınSitesiUı.Dtos.Clients;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -13,8 +13,8 @@ namespace DinamikFırınSitesiUı.ViewComponent
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/Client");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.GetAsync("api/Client");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();

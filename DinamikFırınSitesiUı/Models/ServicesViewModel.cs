@@ -1,6 +1,5 @@
 ﻿using DinamikFırınSitesiUı.Dtos.Services;
 using DinamikFırınSitesiUı.Dtos.ServicesList;
-using System.Collections.Generic;
 
 namespace DinamikFırınSitesiUı.Models
 {

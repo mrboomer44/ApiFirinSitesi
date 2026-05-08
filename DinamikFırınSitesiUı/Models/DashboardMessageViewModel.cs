@@ -1,5 +1,4 @@
 ﻿using DinamikFırınSitesiUı.Dtos.Messages;
-using System.Collections.Generic;
 
 namespace DinamikFırınSitesiUı.Models
 {

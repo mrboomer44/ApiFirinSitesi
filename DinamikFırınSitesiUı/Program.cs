@@ -4,7 +4,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient();
+
+// Named HttpClient - BaseAddress appsettings.json'dan okunur
+builder.Services.AddHttpClient("FirinApi", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"]!);
+});
 
 // IMemoryCache - IP bazlı engelleme için
 builder.Services.AddMemoryCache();

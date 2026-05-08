@@ -1,6 +1,5 @@
 ﻿using DinamikFırınSitesiUı.Dtos.Communications;
 using DinamikFırınSitesiUı.Dtos.SocialMedias;
-using System.Collections.Generic;
 
 namespace DinamikFırınSitesiUı.Models
 {

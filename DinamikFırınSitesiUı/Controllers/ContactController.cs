@@ -31,10 +31,10 @@ namespace DinamikFırınSitesiUı.Controllers
                 return RedirectToAction("Index");
             }
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(dto);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/Message", content);
+            var responseMessage = await client.PostAsync("/api/Message", content);
 
             TempData["ContactMessage"] = responseMessage.IsSuccessStatusCode
                 ? "Mesajiniz basariyla gonderildi."

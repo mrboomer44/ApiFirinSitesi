@@ -16,18 +16,18 @@ namespace DinamikFırınSitesiUı.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var viewModel = new AboutViewModel();
 
 
-            var aboutResponse = await client.GetAsync("https://localhost:7061/api/About");
+            var aboutResponse = await client.GetAsync("/api/About");
             if (aboutResponse.IsSuccessStatusCode)
             {
                 var aboutJson = await aboutResponse.Content.ReadAsStringAsync();
                 viewModel.Abouts = JsonConvert.DeserializeObject<List<ResultAboutDto>>(aboutJson) ?? new List<ResultAboutDto>();
             }
 
-            var listResponse = await client.GetAsync("https://localhost:7061/api/AboutList");
+            var listResponse = await client.GetAsync("/api/AboutList");
             if (listResponse.IsSuccessStatusCode)
             {
                 var listJson = await listResponse.Content.ReadAsStringAsync();
@@ -44,10 +44,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAbout(CreateAboutDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/About", stringContent);
+            var responseMessage = await client.PostAsync("/api/About", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -57,10 +57,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateAbout(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
 
             // ÇÖZÜM: Boş dönen tekil GetById API'si yerine listeyi çekip eşleşeni alıyoruz
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/About");
+            var responseMessage = await client.GetAsync("/api/About");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -83,12 +83,12 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAbout(UpdateAboutDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             var content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
             // API Update isteği
-            var response = await client.PutAsync("https://localhost:7061/api/About", content);
+            var response = await client.PutAsync("/api/About", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -105,10 +105,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAboutList(CreateAboutListDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/AboutList", stringContent);
+            var responseMessage = await client.PostAsync("/api/AboutList", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -118,9 +118,9 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateAboutList(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             // ÇÖZÜM: Boş dönen tekil GetById API'si yerine listeyi çekip eşleşeni alıyoruz
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/AboutList");
+            var responseMessage = await client.GetAsync("/api/AboutList");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -138,11 +138,11 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAboutList(UpdateAboutListDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             var content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
             // API Update isteği
-            var response = await client.PutAsync("https://localhost:7061/api/AboutList", content);
+            var response = await client.PutAsync("/api/AboutList", content);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -152,8 +152,8 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteAboutList(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.DeleteAsync($"https://localhost:7061/api/AboutList/{id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var response = await client.DeleteAsync($"/AboutList/{id}");
             return RedirectToAction("Index");
         }
     }

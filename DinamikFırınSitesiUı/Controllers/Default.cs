@@ -30,7 +30,7 @@ namespace DinamikFırınSitesiUı.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(dto);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/NewsletterEmail", content);
+            var responseMessage = await client.PostAsync("/api/NewsletterEmail", content);
 
             TempData["NewsletterMessage"] = responseMessage.IsSuccessStatusCode
                 ? "E-posta aboneligi basariyla kaydedildi."

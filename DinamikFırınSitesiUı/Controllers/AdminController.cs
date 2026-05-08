@@ -24,9 +24,9 @@ namespace DinamikFırınSitesiUı.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
 
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/Message");
+            var responseMessage = await client.GetAsync("/api/Message");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -47,15 +47,15 @@ namespace DinamikFırınSitesiUı.Controllers
         }
         public async Task<IActionResult> MarkAsRead(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.PutAsync($"https://localhost:7061/api/Message/MarkAsRead/{id}", null);
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.PutAsync($"/api/Message/MarkAsRead/{id}", null);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> DeleteMessage(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7061/api/Message?MessageId={id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.DeleteAsync($"/api/Message?MessageId={id}");
             return RedirectToAction("Index");
         }
 

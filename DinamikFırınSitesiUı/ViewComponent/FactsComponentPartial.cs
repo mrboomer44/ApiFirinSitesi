@@ -1,4 +1,4 @@
-﻿using DinamikFırınSitesiUı.Dtos.Counters;
+using DinamikFırınSitesiUı.Dtos.Counters;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -15,8 +15,8 @@ namespace DinamikFırınSitesiUı.ViewComponent
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/Counter");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.GetAsync("api/Counter");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();

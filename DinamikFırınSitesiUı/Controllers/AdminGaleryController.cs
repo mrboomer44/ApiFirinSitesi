@@ -1,4 +1,4 @@
-﻿using DinamikFırınSitesiUı.Dtos.Galerys;
+using DinamikFırınSitesiUı.Dtos.Galerys;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -13,8 +13,8 @@ namespace DinamikFırınSitesiUı.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseGalery = await client.GetAsync("https://localhost:7061/api/Galery");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseGalery = await client.GetAsync("api/Galery");
             if (responseGalery.IsSuccessStatusCode)
             {
                 var jsonData = await responseGalery.Content.ReadAsStringAsync();
@@ -31,10 +31,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddGalery(CreateGaleryDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/Galery", stringContent);
+            var responseMessage = await client.PostAsync("api/Galery", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -44,8 +44,8 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateGalery(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7061/api/Galery/{id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.GetAsync($"api/Galery/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -57,10 +57,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateGalery(UpdateGaleryDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync($"https://localhost:7061/api/Galery/{model.GaleryId}", stringContent);
+            var responseMessage = await client.PutAsync($"api/Galery/{model.GaleryId}", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -70,8 +70,8 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteGalery(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7061/api/Galery/{id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.DeleteAsync($"api/Galery/{id}");
                 return RedirectToAction("Index");
         }
     }

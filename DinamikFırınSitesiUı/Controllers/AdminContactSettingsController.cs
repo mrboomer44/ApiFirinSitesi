@@ -17,17 +17,17 @@ namespace DinamikFırınSitesiUı.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var viewModel = new ContactSettingsViewModel();
 
-            var responseCommunication = await client.GetAsync("https://localhost:7061/api/Communication");
+            var responseCommunication = await client.GetAsync("/api/Communication");
             if (responseCommunication.IsSuccessStatusCode)
             {
                 var jsonData = await responseCommunication.Content.ReadAsStringAsync();
                 viewModel.Communications = JsonConvert.DeserializeObject<List<ResultCommunicationDto>>(jsonData);
             }
 
-            var responseSocialMedia = await client.GetAsync("https://localhost:7061/api/SocialMedia");
+            var responseSocialMedia = await client.GetAsync("/api/SocialMedia");
             if (responseSocialMedia.IsSuccessStatusCode)
             {
                 var jsonData = await responseSocialMedia.Content.ReadAsStringAsync();
@@ -43,10 +43,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCommunication(CreateCommunicationDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/Communication", stringContent);
+            var responseMessage = await client.PostAsync("/api/Communication", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -61,10 +61,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSocialMedia(CreateSocialMediaDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7061/api/SocialMedia", stringContent);
+            var responseMessage = await client.PostAsync("/api/SocialMedia", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -74,10 +74,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateCommunication(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
 
             // ÇÖZÜM: Boş dönen tekil GetById API'si yerine listeyi çekip eşleşeni alıyoruz
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/Communication");
+            var responseMessage = await client.GetAsync("/api/Communication");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -100,12 +100,12 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateCommunication(UpdateCommunicationDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             var content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
             // API Update isteği
-            var response = await client.PutAsync("https://localhost:7061/api/Communication", content);
+            var response = await client.PutAsync("/api/Communication", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -117,10 +117,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateSocialMedia(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
 
             // ÇÖZÜM: Boş dönen tekil GetById API'si yerine listeyi çekip eşleşeni alıyoruz
-            var responseMessage = await client.GetAsync("https://localhost:7061/api/SocialMedia");
+            var responseMessage = await client.GetAsync("/api/SocialMedia");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -143,12 +143,12 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateSocialMedia(UpdateSocialMediaDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             var content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
             // API Update isteği
-            var response = await client.PutAsync("https://localhost:7061/api/SocialMedia", content);
+            var response = await client.PutAsync("/api/SocialMedia", content);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

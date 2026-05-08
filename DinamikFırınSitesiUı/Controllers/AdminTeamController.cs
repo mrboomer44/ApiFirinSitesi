@@ -1,4 +1,4 @@
-﻿using DinamikFırınSitesiUı.Dtos.Banners;
+using DinamikFırınSitesiUı.Dtos.Banners;
 using DinamikFırınSitesiUı.Dtos.Teams;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,8 +14,8 @@ namespace DinamikFırınSitesiUı.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseTeam = await client.GetAsync("https://localhost:7061/api/Team");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseTeam = await client.GetAsync("api/Team");
             if (responseTeam.IsSuccessStatusCode)
             {
                 var jsonData = await responseTeam.Content.ReadAsStringAsync();
@@ -32,10 +32,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTeam(ResultTeamDto teamDto)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(teamDto);
             StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7061/api/Team", stringContent);
+            var response = await client.PostAsync("api/Team", stringContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -45,8 +45,8 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateTeam(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7061/api/Team/{id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var responseMessage = await client.GetAsync($"api/Team/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -58,10 +58,10 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateTeam(int id, UpdateTeamDto model)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("FirinApi");
             var jsonData = JsonConvert.SerializeObject(model);
             var content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var response = await client.PutAsync($"https://localhost:7061/api/Team", content);
+            var response = await client.PutAsync($"api/Team", content);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -71,8 +71,8 @@ namespace DinamikFırınSitesiUı.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteTeam(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.DeleteAsync($"https://localhost:7061/api/Team/{id}");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var response = await client.DeleteAsync($"api/Team/{id}");
             return RedirectToAction("Index");
         }
     }

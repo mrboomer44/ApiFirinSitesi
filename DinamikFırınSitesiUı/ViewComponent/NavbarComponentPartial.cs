@@ -13,8 +13,8 @@ namespace DinamikFırınSitesiUı.ViewComponent
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
-            var communicationResponse = await client.GetAsync("https://localhost:7061/api/Communication");
+            var client = _httpClientFactory.CreateClient("FirinApi");
+            var communicationResponse = await client.GetAsync("api/Communication");
             if (communicationResponse.IsSuccessStatusCode)
             {
                 var jsonData = await communicationResponse.Content.ReadAsStringAsync();
