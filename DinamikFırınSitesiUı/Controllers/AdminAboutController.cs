@@ -154,10 +154,6 @@ namespace DinamikFırınSitesiUı.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var response = await client.DeleteAsync($"https://localhost:7061/api/AboutList/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index");
-            }
             return RedirectToAction("Index");
         }
     }

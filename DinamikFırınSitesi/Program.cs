@@ -1,7 +1,9 @@
+using DotNetEnv;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+Env.Load();
 builder.Services.AddDbContext<DinamikFýrýnSitesi.Dal.Context.FýrýnContext>();
 
 builder.Services.AddControllers();

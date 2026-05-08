@@ -1,5 +1,6 @@
 using AkademiqDinamikFırınSitesiApi.Dal.Entitys;
 using DinamikFırınSitesiAPI.Dal.Entitys;
+using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 
 namespace DinamikFırınSitesi.Dal.Context
@@ -8,7 +9,8 @@ namespace DinamikFırınSitesi.Dal.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost; initial catalog=DbFırın;integrated Security = true; trust Server certificate=true");
+            var connectionString = Env.GetString("CONNECTION_STRING");
+            optionsBuilder.UseSqlServer(connectionString);
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<AboutList> AboutLists { get; set; }
