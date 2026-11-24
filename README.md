@@ -169,9 +169,3 @@ Admin paneline `/Login/Index` üzerinden erişilir. Varsayılan giriş bilgileri
 - Yetkisiz erişimlerde `/Login/Index` sayfasına yönlendirilir
 - Oturum süresi **8 saat**, sliding expiration aktif
 - Başarısız giriş denemelerinde **IP bazlı 24 saat kilitleme** (MemoryCache ile)
-
----
-
-## 📄 Lisans
-
-Bu proje [MIT Lisansı](LICENSE) altında yayımlanmaktadır.
